@@ -4,6 +4,7 @@
      A                                      DSPSIZ(*DS3)
      A*                                       27x132 display size
      A                                      CA03 CA11
+     A*                                       CA11 = F11 key
      A                                      INDARA
      A*                                       program controls indicators
      A*===============================================================

@@ -32,6 +32,7 @@
      A N03                                  SFLEND(*MORE)
      A*     show "More..." indicator
      A            S1RCDNBR       4S 0H      SFLRCDNBR
+     A*     controls which page is displayed
      A                                  4  4'Row ID '
      A                                      DSPATR(HI)
      A                                      DSPATR(UL)

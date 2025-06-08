@@ -16,7 +16,7 @@ end-ds;
 // Indicator data structure for error highlighting
 dcl-ds  dspf_inds;
     R01_Errors     char(1)    pos(50);   // indicator byte for screen
-       R1Msg_ERR       ind    pos(50);
+       R1Msg_ERR       ind    pos(50);    // overlays bit within R01_Errors
 end-ds;
 
 /include EXFKEY
@@ -34,7 +34,7 @@ dou keyPressed = F3;       // keep looping until user presses F3
 
     // Display any messages that were sent
     write MSGSFLC;         // subfile control record
-    exfmt R01;             // display main screen
+    exfmt R01;             // EXFMT writes/reads display
 
     // Remove messages after displaying the screen
     ClearProgramMessages();

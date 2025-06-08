@@ -12,7 +12,7 @@
          in_message  varchar(80) const;
      end-pi;
 
-    dcl-pr  SendMessage  extpgm('QMHSNDPM');
+    dcl-pr  SendMessage  extpgm('QMHSNDPM');       // Send Program Message API
         msgId            char(7)  const;  // e.g. CPF9898
         msgFile          char(20) const;  // message file/library
         msgData          char(80) const;  // replacement text
@@ -49,7 +49,7 @@
  // Remove all messages from the program message queue
  dcl-proc  ClearProgramMessages;
 
-    dcl-pr  RemoveMessage  extpgm('QMHRMVPM');
+    dcl-pr  RemoveMessage  extpgm('QMHRMVPM');   // Remove Program Message API
         stackEntry       char(10) const;  // program to clean
         stackCount       int(10)  const;  // depth to search
         msgKey           char(4)  const;  // start key or blank

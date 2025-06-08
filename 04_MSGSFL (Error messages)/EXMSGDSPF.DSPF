@@ -26,15 +26,20 @@
      A*                                       first message line number
      A*     messages shown starting on line 23
      A            MSGKEY                    SFLMSGKEY
-     A            PS_PGMNAM                 SFLPGMQ
+     A*                                       message key returned by QMHSNDPM
+     A            PS_PGMNAM                 SFLPGMQ   
+     A*                                       program name column for queue
       *----------------------------------------------------------------
      A          R MSGSFLC                   SFLCTL(MSGSFL)
      A                                      SFLSIZ(0002)
      A                                      SFLPAG(0001)
      A                                      OVERLAY
      A                                      SFLDSP
+     A*                                       show subfile when on
      A                                      SFLDSPCTL
+     A*                                       show control record when on
      A                                      SFLINZ
+     A*                                       initialize subfile fields
      A N98                                  SFLEND
      A*     display "More..." when additional pages exist
      A            PS_PGMNAM                 SFLPGMQ

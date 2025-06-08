@@ -14,7 +14,7 @@ dcl-ds  dspf_info;
 end-ds;
 // Indicator used to show or hide fields
 dcl-ds  dspf_inds;
-  showFields    ind   pos(1);
+  showFields    ind   pos(1);   // maps to indicator 01
 end-ds;
 
 // Constant values for F3 and F11
@@ -25,7 +25,7 @@ dcl-c  F11           x'3B';
 dou keyPressed = F3;      // DOU = do until
 
     // Display the screen
-    exfmt R01;
+    exfmt R01;             // write/read the display
 
     // Toggle the indicator when F11 is pressed
     if keyPressed = F11;

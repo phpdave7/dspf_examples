@@ -7,7 +7,7 @@ ctl-opt  option(*srcstmt: *nodebugio) dftactgrp(*no) actgrp('EXAMPLES');
 // Display file with subfile, INFDS for AID and INDDS for indicators
 dcl-f  EXSFLDSPF   workstn
                    infds(dspf_info)  indds(dspf_inds)
-                   sfile( sfl1 : rrn1 );
+                   sfile( sfl1 : rrn1 );  // associates SFL1 with RRN variable
 
 // AID byte
 dcl-ds  dspf_info;
@@ -16,9 +16,9 @@ end-ds;
 
 // Indicators controlling the subfile
 dcl-ds  dspf_inds;
-    S1_Dsp      ind  pos(1);
-    S1_DspCtl   ind  pos(2);
-    S1_End      ind  pos(3);
+    S1_Dsp      ind  pos(1);    // indicator 01 controls SFLDSP
+    S1_DspCtl   ind  pos(2);    // indicator 02 controls SFLDSPCTL/SFLCLR
+    S1_End      ind  pos(3);    // indicator 03 drives SFLEND(*MORE)
 end-ds;
 
 // relative record number for subfile
@@ -34,7 +34,7 @@ dou keyPressed = F3;       // wait for F3 AID
     clear C1POSITION;
 
     write KEY1;  // display function key line
-    exfmt CTL1;  // show subfile control
+    exfmt CTL1;  // show subfile control (write/read)
 
     // Process function keys
     select;
@@ -73,7 +73,7 @@ dcl-proc  LoadSubfile;
     s1_dsp = *on;
 
     // Load demo data into the subfile
-    for rrn1 = 1 to 713;
+    for rrn1 = 1 to 713;     // 713 rows to illustrate paging
         S1_ROWKEY = %char(rrn1);
         S1_DATFLD = %date + %days(rrn1);
         S1_NBRFLD = rrn1 + (rrn1 / 1000);
@@ -82,6 +82,7 @@ dcl-proc  LoadSubfile;
     endfor;
 
     rrn1 -= 1;          // adjust for final increment
+                        // rrn1 now equals highest RRN
     S1RCDNBR = 1;       // start display at first record
 
 end-proc  LoadSubfile;
