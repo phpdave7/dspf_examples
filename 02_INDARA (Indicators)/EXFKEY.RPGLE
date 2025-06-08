@@ -1,4 +1,6 @@
 **free
+// Constants for the AID values of common function keys
+// (see Workstation Programming Reference for full list)
 
 /IF DEFINED(FKEY)
     /EOF
@@ -36,4 +38,5 @@
     dcl-c  PageDown      x'F5';
     dcl-c  Print         x'F6';
     dcl-c  Recd_Bksp     x'F8';
-    dcl-c  Auto_Enter    x'3F';
+    dcl-c  Auto_Enter    x'3F';      // 5250 automatic enter
+// end of FKEY constants

@@ -2,8 +2,11 @@
      A* AN EXAMPLE DISPLAY FILE
      A*----------------------------------------------------------------
      A                                      DSPSIZ(*DS3)
+     A*                                       27x132 display size
      A                                      CA03 CA11
+     A*                                       CA11 = F11 key
      A                                      INDARA
+     A*                                       program controls indicators
      A*===============================================================
      A* Just a screen
      A*===============================================================
@@ -11,10 +14,13 @@
      A                                  2  3'Press F11 to Show/Hide'
      A  01                              5  3'Press F11 again to hide'
      A                                      COLOR(WHT)
+     A* Field conditioned by indicator 01
      A                                 22  3'F3=Exit'
      A                                      COLOR(BLU)
      A N01                             22 13'F11=Show'
+     A* Shown when indicator 01 is off
      A                                      COLOR(BLU)
      A  01                             22 13'F11=Hide'
+     A* Shown when indicator 01 is on
      A                                      COLOR(BLU)
 

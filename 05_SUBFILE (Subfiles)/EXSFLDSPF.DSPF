@@ -2,16 +2,20 @@
      A* AN EXAMPLE DISPLAY FILE
      A*----------------------------------------------------------------
      A                                      DSPSIZ(24 80 *DS3)
+     A*                                       24x80 with alt size DS3
      A                                      CA03
      A                                      PRINT
      A                                      INDARA
+     A*                                       program handles indicators
      A*===============================================================
      A* A SUBFILE
      A*===============================================================
      A          R SFL1                      SFL
      A  05                                  SFLNXTCHG
+     A*                                       mark changed records
      A            S1_ROWKEY     10A  O  5  4
      A            S1_DATFLD       L  O  5 16DATFMT(*ISO)
+     A*     date for each row
      A            S1_NBRFLD     12Y 3O  5 28EDTCDE(N)
      A            S1_TXTFLD     30A  O  5 46
      A*----------------------------------------------------------------
@@ -22,10 +26,13 @@
      A                                      CA18
      A                                      OVERLAY
      A  01                                  SFLDSP
-     A  02                                  SFLDSPCTL
+     A  02                                  SFLDSPCTL     
+     A*                                       show subfile control record
      A N02                                  SFLCLR
      A N03                                  SFLEND(*MORE)
+     A*     show "More..." indicator
      A            S1RCDNBR       4S 0H      SFLRCDNBR
+     A*     controls which page is displayed
      A                                  4  4'Row ID '
      A                                      DSPATR(HI)
      A                                      DSPATR(UL)
@@ -41,6 +48,7 @@
      A                                  2  4'Position to:'
      A            C1POSITION     4Y 0B  2 17EDTCDE(4)
      A                                      COLOR(YLW)
+     A*     user can type a record number here
      A*----------------------------------------------------------------
      A          R KEY1
      A                                      OVERLAY
@@ -50,3 +58,4 @@
      A                                      COLOR(BLU)
      A                                 23 22'F18=Bottom'
      A                                      COLOR(BLU)
+     A*     function key prompts

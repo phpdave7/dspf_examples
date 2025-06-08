@@ -1,16 +1,23 @@
 **free
+// Demonstrates how to read the AID byte to determine which
+// function key the user pressed.
 
 ctl-opt  option(*srcstmt: *nodebugio) actgrp('EXAMPLES');
 
 
+// Display file with INFDS so we can access the AID byte
 dcl-f  EXAIDDSPF   workstn
                    infds(dspf_info);
 
+// File information data structure where the AID byte lives
+// Manual states the AID value is returned in INFDS position 369
 dcl-ds  dspf_info;
-  keyPressed    char(1)  pos(369);
+  keyPressed    char(1)  pos(369);   // AID byte (position 369 in INFDS)
 end-ds;
+// Holds the numeric index of the function key that was pressed
 dcl-s  fkey     zoned(2);
 
+// Hex values for each function key (from IBM i Workstation Ref)
 dcl-ds  *n;
     F1   char(1)  inz(x'31');
     F2   char(1)  inz(x'32');
@@ -36,22 +43,30 @@ dcl-ds  *n;
     F22  char(1)  inz(x'BA');
     F23  char(1)  inz(x'BB');
     F24  char(1)  inz(x'BC');
-    functionKeys  char(1)  dim(24)  pos(1);
+    functionKeys  char(1)  dim(24)  pos(1);   // overlay constants so index=F key
+                                               // %LOOKUP result = F key number
 end-ds;
 
 
-dou R1MSG = 'EXIT';
+// Keep prompting the user until they type EXIT
+dou R1MSG = 'EXIT';        // DOU evaluates after each loop
+                           // loop ends when message field contains EXIT
 
-    exfmt R01;
+    // Show the screen and wait for the user
+    exfmt R01;            // EXFMT = write/read combined
 
+    // allow the user to exit by typing EXIT
     if R1MSG = 'EXIT';
         leave;
     endif;
 
-    fkey = %lookup(keyPressed : functionKeys);
+    // Translate the AID byte into a function key number
+    fkey = %lookup(keyPressed : functionKeys);  // array index is F key number
     if fkey > 0;
+        // Tell the user which F key was pressed
         R1MSG = 'You pressed F' + %char(fkey);
     else;
+        // Some other AID value was returned
         R1MSG = 'You pressed something other than F1 - F24';
     endif;
 

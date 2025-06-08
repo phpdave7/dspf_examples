@@ -2,8 +2,10 @@
      A* AN EXAMPLE DISPLAY FILE
      A*----------------------------------------------------------------
      A                                      DSPSIZ(*DS3)
+     A*                                       27x132 display size
      A                                      CA03
      A                                      INDARA
+     A*                                       indicators from INDDS
      A*===============================================================
      A* Just a screen
      A*===============================================================
@@ -16,20 +18,28 @@
      A  50                                  DSPATR(PC RI)
      A                                 22  2'F3=Exit'
      A                                      COLOR(BLU)
-      *===============================================================
-      * MESSAGE SUBFILE
-      *===============================================================
+     *===============================================================
+     * MESSAGE SUBFILE
+     *===============================================================
      A          R MSGSFL                    SFL
      A                                      SFLMSGRCD(23)
+     A*                                       first message line number
+     A*     messages shown starting on line 23
      A            MSGKEY                    SFLMSGKEY
-     A            PS_PGMNAM                 SFLPGMQ
+     A*                                       message key returned by QMHSNDPM
+     A            PS_PGMNAM                 SFLPGMQ   
+     A*                                       program name column for queue
       *----------------------------------------------------------------
      A          R MSGSFLC                   SFLCTL(MSGSFL)
      A                                      SFLSIZ(0002)
      A                                      SFLPAG(0001)
      A                                      OVERLAY
      A                                      SFLDSP
+     A*                                       show subfile when on
      A                                      SFLDSPCTL
+     A*                                       show control record when on
      A                                      SFLINZ
+     A*                                       initialize subfile fields
      A N98                                  SFLEND
+     A*     display "More..." when additional pages exist
      A            PS_PGMNAM                 SFLPGMQ
