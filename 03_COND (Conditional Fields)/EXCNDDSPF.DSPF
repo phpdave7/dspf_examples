@@ -11,10 +11,13 @@
      A                                  2  3'Press F11 to Show/Hide'
      A  01                              5  3'Press F11 again to hide'
      A                                      COLOR(WHT)
+     A* Field conditioned by indicator 01
      A                                 22  3'F3=Exit'
      A                                      COLOR(BLU)
      A N01                             22 13'F11=Show'
+     A* Shown when indicator 01 is off
      A                                      COLOR(BLU)
      A  01                             22 13'F11=Hide'
+     A* Shown when indicator 01 is on
      A                                      COLOR(BLU)
 

@@ -14,7 +14,10 @@
      A                                  4  3'Message:'
      A            R1MSG         50A  B  4 12DSPATR(UL)
      A  01                                  COLOR(RED)
+     A*     shown when RED indicator is on
      A  02                                  COLOR(WHT)
+     A*     shown when WHITE indicator is on
      A  03                                  COLOR(BLU)
+     A*     shown when BLUE indicator is on
      A                                 22  3'F3=Exit'
      A                                      COLOR(BLU)

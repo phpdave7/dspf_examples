@@ -16,11 +16,12 @@
      A  50                                  DSPATR(PC RI)
      A                                 22  2'F3=Exit'
      A                                      COLOR(BLU)
-      *===============================================================
-      * MESSAGE SUBFILE
-      *===============================================================
+     *===============================================================
+     * MESSAGE SUBFILE
+     *===============================================================
      A          R MSGSFL                    SFL
-     A                                      SFLMSGRCD(23)
+     A                                      SFLMSGRCD(23)  
+     A*     messages shown starting on line 23
      A            MSGKEY                    SFLMSGKEY
      A            PS_PGMNAM                 SFLPGMQ
       *----------------------------------------------------------------
@@ -32,4 +33,5 @@
      A                                      SFLDSPCTL
      A                                      SFLINZ
      A N98                                  SFLEND
+     A*     display "More..." when additional pages exist
      A            PS_PGMNAM                 SFLPGMQ

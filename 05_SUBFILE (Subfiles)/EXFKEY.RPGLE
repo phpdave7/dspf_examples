@@ -1,4 +1,5 @@
 **free
+// Constants for the AID values of common function keys
 
 /IF DEFINED(FKEY)
     /EOF
@@ -37,3 +38,4 @@
     dcl-c  Print         x'F6';
     dcl-c  Recd_Bksp     x'F8';
     dcl-c  Auto_Enter    x'3F';
+// end of FKEY constants

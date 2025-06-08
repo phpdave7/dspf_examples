@@ -1,64 +1,78 @@
 **free
+// Example program that demonstrates loading and displaying
+// a simple subfile.
 
 ctl-opt  option(*srcstmt: *nodebugio) dftactgrp(*no) actgrp('EXAMPLES');
 
+// Display file with subfile, INFDS for AID and INDDS for indicators
 dcl-f  EXSFLDSPF   workstn
                    infds(dspf_info)  indds(dspf_inds)
                    sfile( sfl1 : rrn1 );
 
+// AID byte
 dcl-ds  dspf_info;
   keyPressed    char(1)  pos(369);
 end-ds;
 
+// Indicators controlling the subfile
 dcl-ds  dspf_inds;
     S1_Dsp      ind  pos(1);
     S1_DspCtl   ind  pos(2);
     S1_End      ind  pos(3);
 end-ds;
 
+// relative record number for subfile
 dcl-s rrn1      uns(5);
 
 /include EXFKEY
 
-LoadSubfile();
+LoadSubfile();  // build the subfile before display
+// Main loop - exit on F3
 dou keyPressed = F3;
 
+    // Clear position to field
     clear C1POSITION;
 
-    write KEY1;
-    exfmt CTL1;
+    write KEY1;  // display function key line
+    exfmt CTL1;  // show subfile control
 
+    // Process function keys
     select;
 
         when keyPressed = F3;
             leave;
 
         when keyPressed = F17;
+            // Go to top of subfile
             S1RCDNBR = 1;
 
         when keyPressed = F18;
+            // Go to bottom of subfile
             S1RCDNBR = RRN1;
 
         when C1POSITION > 0;
+            // Position to specific record
             S1RCDNBR = C1POSITION;
 
     endsl;
 
-enddo;
+enddo;  // loop until F3 pressed
 
 *inlr = *on;
-return;
+return;  // end of program
 
 
 //=========================================================
 dcl-proc  LoadSubfile;
 
+    // Clear existing subfile records
     s1_dsp = *off;
     s1_dspCtl = *off;
     write  CTL1;
     s1_dspCtl = *on;
     s1_dsp = *on;
 
+    // Load demo data into the subfile
     for rrn1 = 1 to 713;
         S1_ROWKEY = %char(rrn1);
         S1_DATFLD = %date + %days(rrn1);
@@ -68,6 +82,8 @@ dcl-proc  LoadSubfile;
     endfor;
 
     rrn1 -= 1;
-    S1RCDNBR = 1;
+    S1RCDNBR = 1;       // start display at first record
 
 end-proc  LoadSubfile;
+
+// end of program

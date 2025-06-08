@@ -1,4 +1,5 @@
 **free
+// Program status data structure used by examples
 
 /IF DEFINED(PSDS)
     /EOF
@@ -23,3 +24,5 @@ dcl-ds PSDS PSDS;
     PS_JobId      char(16)  pos(380);   // Job ID (used by work management APIs)
     PS_SysNam     char(8)   pos(396);   // System name
 end-ds;
+
+// end of PSDS copybook

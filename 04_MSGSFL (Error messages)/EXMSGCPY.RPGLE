@@ -1,10 +1,12 @@
 **free
+// Procedures for sending and clearing program messages
 /IF DEFINED(MSGCPY)
     /EOF
 /ENDIF
 /DEFINE MSGCPY
 
  //========================================================================
+ // Send a CPF9898 message to the program message queue
  dcl-proc  SendProgramMessage;
      dcl-pi  *n;
          in_message  varchar(80) const;
@@ -44,6 +46,7 @@
 
 
  //========================================================================
+ // Remove all messages from the program message queue
  dcl-proc  ClearProgramMessages;
 
      dcl-pr  RemoveMessage  extpgm('QMHRMVPM');
@@ -68,4 +71,6 @@
                   : errorDS
                   );
 
- end-proc  ClearProgramMessages;
+end-proc  ClearProgramMessages;
+
+// end of copybook

@@ -1,16 +1,22 @@
 **free
+// Demonstrates how to read the AID byte to determine which
+// function key the user pressed.
 
 ctl-opt  option(*srcstmt: *nodebugio) actgrp('EXAMPLES');
 
 
+// Display file with INFDS so we can access the AID byte
 dcl-f  EXAIDDSPF   workstn
                    infds(dspf_info);
 
+// File information data structure where the AID byte lives
 dcl-ds  dspf_info;
-  keyPressed    char(1)  pos(369);
+  keyPressed    char(1)  pos(369);   // AID byte
 end-ds;
+// Holds the numeric index of the function key that was pressed
 dcl-s  fkey     zoned(2);
 
+// Hex values for each function key
 dcl-ds  *n;
     F1   char(1)  inz(x'31');
     F2   char(1)  inz(x'32');
@@ -36,22 +42,28 @@ dcl-ds  *n;
     F22  char(1)  inz(x'BA');
     F23  char(1)  inz(x'BB');
     F24  char(1)  inz(x'BC');
-    functionKeys  char(1)  dim(24)  pos(1);
+    functionKeys  char(1)  dim(24)  pos(1);   // array for lookup
 end-ds;
 
 
+// Keep prompting the user until they type EXIT
 dou R1MSG = 'EXIT';
 
+    // Show the screen and wait for the user
     exfmt R01;
 
+    // allow the user to exit by typing EXIT
     if R1MSG = 'EXIT';
         leave;
     endif;
 
+    // Translate the AID byte into a function key number
     fkey = %lookup(keyPressed : functionKeys);
     if fkey > 0;
+        // Tell the user which F key was pressed
         R1MSG = 'You pressed F' + %char(fkey);
     else;
+        // Some other AID value was returned
         R1MSG = 'You pressed something other than F1 - F24';
     endif;
 

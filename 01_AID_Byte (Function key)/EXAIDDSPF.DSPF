@@ -9,9 +9,10 @@
      A*===============================================================
      A* Just a screen
      A*===============================================================
-     A          R R01
+     A          R R01                               
      A                                  2  3'Press a function key, or type "EXI-
      A                                      T" to quit:'
      A                                      COLOR(BLU)
      A                                  4  3'Message:'
-     A            R1MSG         50A  B  4 12DSPATR(UL)
+     A            R1MSG         50A  B  4 12DSPATR(UL)  
+     A*                                           message text
