@@ -22,7 +22,7 @@ dcl-c  F3            x'33';
 dcl-c  F11           x'3B';
 
 // Loop until F3 is pressed
-dou keyPressed = F3;
+dou keyPressed = F3;      // DOU = do until
 
     // Display the screen
     exfmt R01;

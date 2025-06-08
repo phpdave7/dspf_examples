@@ -15,7 +15,7 @@ end-ds;
 
 // Indicator data structure for error highlighting
 dcl-ds  dspf_inds;
-    R01_Errors     char(1)    pos(50);
+    R01_Errors     char(1)    pos(50);   // indicator byte for screen
        R1Msg_ERR       ind    pos(50);
 end-ds;
 
@@ -27,14 +27,14 @@ end-ds;
 SendProgramMessage('Program started...');
 
 // Main loop - exit on F3
-dou keyPressed = F3;
+dou keyPressed = F3;       // keep looping until user presses F3
 
     // Clear previous input and display
     clear R1MSG;
 
     // Display any messages that were sent
-    write MSGSFLC;
-    exfmt R01;
+    write MSGSFLC;         // subfile control record
+    exfmt R01;             // display main screen
 
     // Remove messages after displaying the screen
     ClearProgramMessages();

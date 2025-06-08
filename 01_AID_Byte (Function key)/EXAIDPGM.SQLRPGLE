@@ -11,7 +11,7 @@ dcl-f  EXAIDDSPF   workstn
 
 // File information data structure where the AID byte lives
 dcl-ds  dspf_info;
-  keyPressed    char(1)  pos(369);   // AID byte
+  keyPressed    char(1)  pos(369);   // AID byte (position 369 in INFDS)
 end-ds;
 // Holds the numeric index of the function key that was pressed
 dcl-s  fkey     zoned(2);
@@ -42,12 +42,12 @@ dcl-ds  *n;
     F22  char(1)  inz(x'BA');
     F23  char(1)  inz(x'BB');
     F24  char(1)  inz(x'BC');
-    functionKeys  char(1)  dim(24)  pos(1);   // array for lookup
+    functionKeys  char(1)  dim(24)  pos(1);   // overlay constants so index=F key
 end-ds;
 
 
 // Keep prompting the user until they type EXIT
-dou R1MSG = 'EXIT';
+dou R1MSG = 'EXIT';        // DOU evaluates after each loop
 
     // Show the screen and wait for the user
     exfmt R01;
@@ -58,7 +58,7 @@ dou R1MSG = 'EXIT';
     endif;
 
     // Translate the AID byte into a function key number
-    fkey = %lookup(keyPressed : functionKeys);
+    fkey = %lookup(keyPressed : functionKeys);  // array index is F key number
     if fkey > 0;
         // Tell the user which F key was pressed
         R1MSG = 'You pressed F' + %char(fkey);

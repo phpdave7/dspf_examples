@@ -17,7 +17,7 @@ end-ds;
 
 // Indicator data structure for field colors
 dcl-ds  dspf_inds;
-  colors  char(3)  pos(1);
+  colors  char(3)  pos(1);      // 3 bytes of indicators as a block
     red       ind  pos(1);
     white     ind  pos(2);
     blue      ind  pos(3);
@@ -27,7 +27,7 @@ end-ds;
 
 
 // Exit when F3 is pressed
-dou keyPressed = F3;
+dou keyPressed = F3;       // loop until the F3 AID value arrives
 
     // Show the screen
     exfmt R01;

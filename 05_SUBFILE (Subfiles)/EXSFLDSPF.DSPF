@@ -2,14 +2,17 @@
      A* AN EXAMPLE DISPLAY FILE
      A*----------------------------------------------------------------
      A                                      DSPSIZ(24 80 *DS3)
+     A*                                       24x80 with alt size DS3
      A                                      CA03
      A                                      PRINT
      A                                      INDARA
+     A*                                       program handles indicators
      A*===============================================================
      A* A SUBFILE
      A*===============================================================
      A          R SFL1                      SFL
      A  05                                  SFLNXTCHG
+     A*                                       mark changed records
      A            S1_ROWKEY     10A  O  5  4
      A            S1_DATFLD       L  O  5 16DATFMT(*ISO)
      A*     date for each row
@@ -23,7 +26,8 @@
      A                                      CA18
      A                                      OVERLAY
      A  01                                  SFLDSP
-     A  02                                  SFLDSPCTL
+     A  02                                  SFLDSPCTL     
+     A*                                       show subfile control record
      A N02                                  SFLCLR
      A N03                                  SFLEND(*MORE)
      A*     show "More..." indicator

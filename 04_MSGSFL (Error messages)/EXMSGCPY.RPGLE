@@ -12,17 +12,17 @@
          in_message  varchar(80) const;
      end-pi;
 
-     dcl-pr  SendMessage  extpgm('QMHSNDPM');
-         msgId            char(7)  const;
-         msgFile          char(20) const;
-         msgData          char(80) const;
-         msgLength        int(10)  const;
-         msgType          char(10) const;
-         stackEntry       char(10) const;
-         stackCounter     int(10)  const;
-         msgKey           char(4);
-         errorDs          likeds(errorDs);
-     end-pr;
+    dcl-pr  SendMessage  extpgm('QMHSNDPM');
+        msgId            char(7)  const;  // e.g. CPF9898
+        msgFile          char(20) const;  // message file/library
+        msgData          char(80) const;  // replacement text
+        msgLength        int(10)  const;  // length of msgData
+        msgType          char(10) const;  // *INFO, *DIAG, etc
+        stackEntry       char(10) const;  // call stack program
+        stackCounter     int(10)  const;  // call stack depth
+        msgKey           char(4);         // returned key
+        errorDs          likeds(errorDs); // API error structure
+    end-pr;
 
      dcl-ds  errorDs;
          bytesProvided    int(10) inz(16);
@@ -49,13 +49,13 @@
  // Remove all messages from the program message queue
  dcl-proc  ClearProgramMessages;
 
-     dcl-pr  RemoveMessage  extpgm('QMHRMVPM');
-         stackEntry       char(10) const;
-         stackCount       int(10)  const;
-         msgKey           char(4)  const;
-         toRemove         char(10) const;
-         errorDs          likeds(errorDs);
-     end-pr;
+    dcl-pr  RemoveMessage  extpgm('QMHRMVPM');
+        stackEntry       char(10) const;  // program to clean
+        stackCount       int(10)  const;  // depth to search
+        msgKey           char(4)  const;  // start key or blank
+        toRemove         char(10) const;  // *ALL, *PRV, etc
+        errorDs          likeds(errorDs); // API error
+    end-pr;
 
      dcl-ds  errorDs;
          bytesProvided    int(10) inz(16);

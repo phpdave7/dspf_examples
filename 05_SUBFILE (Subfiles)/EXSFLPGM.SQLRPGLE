@@ -28,7 +28,7 @@ dcl-s rrn1      uns(5);
 
 LoadSubfile();  // build the subfile before display
 // Main loop - exit on F3
-dou keyPressed = F3;
+dou keyPressed = F3;       // wait for F3 AID
 
     // Clear position to field
     clear C1POSITION;
@@ -52,7 +52,7 @@ dou keyPressed = F3;
 
         when C1POSITION > 0;
             // Position to specific record
-            S1RCDNBR = C1POSITION;
+            S1RCDNBR = C1POSITION;  // sets top record displayed
 
     endsl;
 
@@ -67,7 +67,7 @@ dcl-proc  LoadSubfile;
 
     // Clear existing subfile records
     s1_dsp = *off;
-    s1_dspCtl = *off;
+    s1_dspCtl = *off;      // erase existing subfile
     write  CTL1;
     s1_dspCtl = *on;
     s1_dsp = *on;
@@ -81,7 +81,7 @@ dcl-proc  LoadSubfile;
         write  SFL1;
     endfor;
 
-    rrn1 -= 1;
+    rrn1 -= 1;          // adjust for final increment
     S1RCDNBR = 1;       // start display at first record
 
 end-proc  LoadSubfile;

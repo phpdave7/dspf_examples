@@ -2,8 +2,10 @@
      A* AN EXAMPLE DISPLAY FILE
      A*----------------------------------------------------------------
      A                                      DSPSIZ(*DS3)
+     A*                                       27x132 display size
      A                                      CA03
      A                                      INDARA
+     A*                                       indicators from INDDS
      A*===============================================================
      A* Just a screen
      A*===============================================================
@@ -20,7 +22,8 @@
      * MESSAGE SUBFILE
      *===============================================================
      A          R MSGSFL                    SFL
-     A                                      SFLMSGRCD(23)  
+     A                                      SFLMSGRCD(23)
+     A*                                       first message line number
      A*     messages shown starting on line 23
      A            MSGKEY                    SFLMSGKEY
      A            PS_PGMNAM                 SFLPGMQ
